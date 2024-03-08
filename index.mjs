@@ -7,14 +7,21 @@ const path = await import('path').then(module => module.default);
 const __dirname = process.cwd();
 
 const generateScreenComponent = (name) => {
-  const componentTemplate = `import Label from "../../common/components/Label";
+  const componentTemplate = `import Card from "../../common/components/Card";
+import Label from "../../common/components/Label";
 import ScreenWrapper from "../../common/components/ScreenWrapper";
+import { Edge } from "../../types/edges.enum";
 import { ScreenProps } from "../../types/screen.props";
 
 export default function ${name}Screen({ navigation, route }: ScreenProps<'${name}'>) {
   return (
     <ScreenWrapper>
-      <Label>${name}</Label>
+      <Card showBorder={false} padding={Edge.all(0)} align="flex-start" separation={20}>
+        <Label type="title-1">{route.name}</Label>
+        <Card separation={20}>
+          <Label>Hi</Label>
+        </Card>
+      </Card>
     </ScreenWrapper>
   )
 }
@@ -66,7 +73,7 @@ ${replacement2}`;
   try {
     let content = await fs.default.readFile(screenPropsPath, 'utf8');
     const replacement = `export type ScreenParams = {`;
-    const newContent = `${replacement},
+    const newContent = `${replacement}
   ${screenName}: undefined,`;
     content = content.replace(replacement, newContent);
     await fs.default.writeFile(screenPropsPath, content);
