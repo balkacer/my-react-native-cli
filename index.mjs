@@ -32,7 +32,7 @@ export default function ${name}Screen(props: ScreenProps<'${name}'>) {
 const addScreen = async (screenName) => {
   const screensFilePath = path.join(__dirname, 'src', 'screens', 'index.ts');
   const mainNavFilePath = path.join(__dirname, 'src', 'navigation', 'MainNavigator.tsx');
-  const screenPropsPath = path.join(__dirname, 'src', 'types', 'screen.props.ts');
+  const screenPropsPath = path.join(__dirname, 'src', 'types', 'screen.types.ts');
 
   // screens/index.ts
   try {
@@ -68,7 +68,7 @@ ${replacement2}`;
     console.error(`Error adding screen ${screenName} to navigation/MainNavigator.tsx:`, error);
   }
 
-  // types/screen.props.ts
+  // types/screen.types.ts
   try {
     let content = await fs.default.readFile(screenPropsPath, 'utf8');
     const replacement = `export type ScreenParams = {`;
@@ -76,9 +76,9 @@ ${replacement2}`;
   ${screenName}: undefined,`;
     content = content.replace(replacement, newContent);
     await fs.default.writeFile(screenPropsPath, content);
-    console.log(`Screen ${screenName} added successfully to types/screen.props.ts.`);
+    console.log(`Screen ${screenName} added successfully to types/screen.types.ts.`);
   } catch (error) {
-    console.error(`Error adding screen ${screenName} to types/screen.props.ts:`, error);
+    console.error(`Error adding screen ${screenName} to types/screen.types.ts:`, error);
   }
 };
 
