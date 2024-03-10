@@ -8,20 +8,21 @@ const __dirname = process.cwd();
 
 const generateScreenComponent = (name) => {
   const componentTemplate = `import Card from "../../common/components/Card";
+import ScreenHeader from "../../common/components/Header";
 import Label from "../../common/components/Label";
 import ScreenWrapper from "../../common/components/ScreenWrapper";
-import { Edge } from "../../types/edges.enum";
+import { Main } from "../../common/components/ScreenWrapper/styled";
 import { ScreenProps } from "../../types/screen.props";
 
-export default function ${name}Screen({ navigation, route }: ScreenProps<'${name}'>) {
+export default function ${name}Screen(props: ScreenProps<'${name}'>) {
   return (
     <ScreenWrapper>
-      <Card showBorder={false} padding={Edge.all(0)} align="flex-start" separation={20}>
-        <Label type="title-1">{route.name}</Label>
+      <ScreenHeader screenProps={props} />
+      <Main>
         <Card separation={20}>
           <Label>Hi</Label>
         </Card>
-      </Card>
+      </Main>
     </ScreenWrapper>
   )
 }
