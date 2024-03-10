@@ -7,12 +7,10 @@ const path = await import('path').then(module => module.default);
 const __dirname = process.cwd();
 
 const generateScreenComponent = (name) => {
-  const componentTemplate = `import Card from "../../common/components/Card";
-import ScreenHeader from "../../common/components/Header";
-import Label from "../../common/components/Label";
-import ScreenWrapper from "../../common/components/ScreenWrapper";
-import { Main } from "../../common/components/ScreenWrapper/styled";
-import { ScreenProps } from "../../types/screen.props";
+  const componentTemplate = `import React from 'react';
+import { Card, Label, ScreenHeader, ScreenWrapper } from '@components';
+import { Main } from '@components/ScreenWrapper/styled';
+import { ScreenProps } from '@tps/screen.types';
 
 export default function ${name}Screen(props: ScreenProps<'${name}'>) {
   return (
